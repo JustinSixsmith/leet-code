@@ -9,6 +9,8 @@ public class Solutions {
 
         System.out.println(romanToInt("MXIV"));
 
+        System.out.println(intToRoman(1014));
+
     }
 
     public static int romanToInt(String s) {
@@ -34,11 +36,26 @@ public class Solutions {
                 result += map.get(s.charAt(i));
             }
         }
-
-
         return result;
+    }
 
-
+    public static String intToRoman(int num) {
+        // Setup code arrays for ints and their corresponding roman numerals
+        int[] intCode = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+        String[] code = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+        
+        StringBuilder sb = new StringBuilder();
+        // Loop over intCode array
+        for (int i = 0; i < intCode.length; i++) {
+            // Check to see if the num parameter is greater or equal to the checked intCode
+            while(num >= intCode[i]) {
+                // If so, append it to the string builder
+                sb.append(code[i]);
+                // Then subtract it from the num and repeat
+                num -= intCode[i];
+            }
+        }
+        return sb.toString();
     }
 
 }
