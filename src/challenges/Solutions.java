@@ -39,6 +39,7 @@ public class Solutions {
         return result;
     }
 
+
     public static String intToRoman(int num) {
         // Setup code arrays for ints and their corresponding roman numerals
         int[] intCode = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
@@ -56,6 +57,21 @@ public class Solutions {
             }
         }
         return sb.toString();
+    }
+
+
+    private final String[] THOUSANDS = {"", "Thousand", "Million", "Billion"};
+
+    private final String[] LESS_THAN_TWENTY = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+
+    private final String[] TENS = {"", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+    public String numberToWords(int num) {
+        if (num === 0) {
+            return "Zero";
+        }
+
+
     }
 
 }
