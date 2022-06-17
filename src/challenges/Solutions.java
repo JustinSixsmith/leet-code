@@ -11,6 +11,8 @@ public class Solutions {
 
         System.out.println(intToRoman(1014));
 
+        System.out.println(numberToWords(123));
+
     }
 
     public static int romanToInt(String s) {
@@ -44,12 +46,12 @@ public class Solutions {
         // Setup code arrays for ints and their corresponding roman numerals
         int[] intCode = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
         String[] code = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-        
+
         StringBuilder sb = new StringBuilder();
         // Loop over intCode array
         for (int i = 0; i < intCode.length; i++) {
             // Check to see if the num parameter is greater or equal to the checked intCode
-            while(num >= intCode[i]) {
+            while (num >= intCode[i]) {
                 // If so, append it to the string builder
                 sb.append(code[i]);
                 // Then subtract it from the num and repeat
@@ -60,18 +62,40 @@ public class Solutions {
     }
 
 
-    private final String[] THOUSANDS = {"", "Thousand", "Million", "Billion"};
+    static String[] bigUnits = {"", " Thousand", " Million", " Billion"};
+    static String[] digits = {"", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine"};
+    static String[] tens = {"", "", " Twenty", "T Thirty", " Forty", " Fifty", " Sixty", " Seventy", " Eighty", " Ninety"};
+    static String[] tenToTwenty = {" Ten", " Eleven", " Twelve", " Thirteen", " Fourteen", " Fifteen", " Sixteen", " Seventeen", " Eighteen", " Nineteen"};
 
-    private final String[] LESS_THAN_TWENTY = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+    public static StringBuilder result = new StringBuilder();
+    static int bigUnitIndex = 0;
 
-    private final String[] TENS = {"", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
-
-    public String numberToWords(int num) {
-        if (num === 0) {
-            return "Zero";
+    public static String numberToWords(int num) {
+        while (num != 0) {
+            if (num % 1000 != 0) {
+                result.insert(0, parseThreeDigits(num % 1000) + bigUnits[bigUnitIndex] + "");
+                num /= 1000;
+                bigUnitIndex++;
+            }
         }
-
-
+        return result.length() == 0 ? "Zero" : result.substring(1).toString();
     }
+
+    public static String parseThreeDigits(int num) {
+        if (num > 99) {
+            result.append(digits[num / 100]).append(" Hundred");
+            num = num % 100;
+        }
+        if (num > 19) {
+            result.append(tens[num / 10]);
+            num = num / 10;
+        }
+        if (num > 9) {
+            result.append(tenToTwenty[num % 10]);
+            return result.toString();
+        }
+        return result.append(digits[num]).toString();
+    }
+
 
 }
