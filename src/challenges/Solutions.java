@@ -11,7 +11,7 @@ public class Solutions {
 
         System.out.println(intToRoman(1014));
 
-        System.out.println(numberToWords(123));
+        System.out.println(numberToWords(12345));
 
     }
 
@@ -64,7 +64,7 @@ public class Solutions {
 
     static String[] bigUnits = {"", " Thousand", " Million", " Billion"};
     static String[] digits = {"", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine"};
-    static String[] tens = {"", "", " Twenty", "T Thirty", " Forty", " Fifty", " Sixty", " Seventy", " Eighty", " Ninety"};
+    static String[] tens = {"", "", " Twenty", "Thirty", " Forty", " Fifty", " Sixty", " Seventy", " Eighty", " Ninety"};
     static String[] tenToTwenty = {" Ten", " Eleven", " Twelve", " Thirteen", " Fourteen", " Fifteen", " Sixteen", " Seventeen", " Eighteen", " Nineteen"};
 
     public static StringBuilder result = new StringBuilder();
@@ -74,21 +74,22 @@ public class Solutions {
         while (num != 0) {
             if (num % 1000 != 0) {
                 result.insert(0, parseThreeDigits(num % 1000) + bigUnits[bigUnitIndex] + "");
-                num /= 1000;
-                bigUnitIndex++;
             }
+            num /= 1000;
+            bigUnitIndex++;
         }
-        return result.length() == 0 ? "Zero" : result.substring(1).toString();
+        return result.length() == 0 ? "Zero" : result.substring(1);
     }
 
     public static String parseThreeDigits(int num) {
+        StringBuilder result = new StringBuilder();
         if (num > 99) {
             result.append(digits[num / 100]).append(" Hundred");
             num = num % 100;
         }
         if (num > 19) {
             result.append(tens[num / 10]);
-            num = num / 10;
+            num = num % 10;
         }
         if (num > 9) {
             result.append(tenToTwenty[num % 10]);
