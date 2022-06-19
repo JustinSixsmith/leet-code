@@ -11,6 +11,8 @@ public class Solutions {
 
         System.out.println(intToRoman(1014));
 
+        System.out.println(numToWords(12345));
+
         System.out.println(numberToWords(12345));
 
     }
@@ -70,7 +72,7 @@ public class Solutions {
     public static StringBuilder result = new StringBuilder();
     static int bigUnitIndex = 0;
 
-    public static String numberToWords(int num) {
+    public static String numToWords(int num) {
         while (num != 0) {
             if (num % 1000 != 0) {
                 result.insert(0, parseThreeDigits(num % 1000) + bigUnits[bigUnitIndex] + "");
@@ -97,6 +99,7 @@ public class Solutions {
         }
         return result.append(digits[num]).toString();
     }
+
 
 
     private String oneDigit(int num) {
@@ -143,12 +146,35 @@ public class Solutions {
     }
 
     private String twoDigits(int num) {
-        if (num < 10) {
-            return oneDigit(num;
+            if (num < 10) {
+                return oneDigit(num);
+            }
+            if (num < 20) {
+                return underTwenty(num);
+            }
+            int tensNum = num / 10 * 10;
+            int onesNum = num % 10;
+            if (onesNum == 0) {
+                return tens(tensNum);
+            }
+            return tens(tensNum) + " " + oneDigit(onesNum);
+    }
+
+    private String threeDigits(int num) {
+        int hundredsNum = num / 100 * 100;
+        int rest = num % 100;
+        if (hundredsNum == 0) {
+            return twoDigits(rest);
         }
-        if (num < 20) {
-            return underTwenty(num);
+        if (rest == 0) {
+            return oneDigit(hundredsNum) + " " + "Hundred";
         }
-}
+        return oneDigit(hundredsNum) + " " + "Hundred " + twoDigits(rest);
+
+    }
+
+    private String numberToWords(int num) {
+
+    }
 
 }
