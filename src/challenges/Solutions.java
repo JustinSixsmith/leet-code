@@ -174,7 +174,31 @@ public class Solutions {
     }
 
     private String numberToWords(int num) {
+        if (num == 0) {
+            return "Zero";
+        }
 
+        int billion = num / 1000000000;
+        num -= billion * 1000000000;
+        int million = num / 1000000;
+        num -= million * 1000000;
+        int thousand = num / 1000;
+        num -= thousand * 1000;
+
+        String ret;
+        if (billion > 0) {
+            ret += (threeDigits(billion) + " Billion ");
+        }
+        if (million > 0) {
+            ret += (threeDigits(million) + " Million ");
+        }
+        if (thousand > 0) {
+            ret += (threeDigits(thousand) + " Thousand ");
+        }
+        if (rest > 0) {
+            ret += threeDigits(num);
+        }
+        return ret.strip();
     }
 
 }
