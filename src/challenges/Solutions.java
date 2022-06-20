@@ -102,7 +102,7 @@ public class Solutions {
 
 
 
-    private String oneDigit(int num) {
+    private static String ones(int num) {
         switch (num) {
             case 1: return "One";
             case 2: return "Two";
@@ -117,7 +117,7 @@ public class Solutions {
         return "";
     }
 
-    private String underTwenty(int num) {
+    private static String underTwenty(int num) {
         switch (num) {
             case 10: return "Ten";
             case 11: return "Eleven";
@@ -130,9 +130,10 @@ public class Solutions {
             case 18: return "Eighteen";
             case 19: return "Nineteen";
         }
+        return "";
     }
 
-    private String tens(int num) {
+    private static String tens(int num) {
         switch (num) {
             case 20: return "Twenty";
             case 30: return "Thirty";
@@ -143,11 +144,12 @@ public class Solutions {
             case 80: return "Eighty";
             case 90: return "Ninety";
         }
+        return "";
     }
 
-    private String twoDigits(int num) {
+    private static String twoDigits(int num) {
             if (num < 10) {
-                return oneDigit(num);
+                return ones(num);
             }
             if (num < 20) {
                 return underTwenty(num);
@@ -157,23 +159,23 @@ public class Solutions {
             if (onesNum == 0) {
                 return tens(tensNum);
             }
-            return tens(tensNum) + " " + oneDigit(onesNum);
+            return tens(tensNum) + " " + ones(onesNum);
     }
 
-    private String threeDigits(int num) {
-        int hundredsNum = num / 100 * 100;
+    private static String threeDigits(int num) {
+        int hundredsNum = num / 100;
         int rest = num % 100;
         if (hundredsNum == 0) {
             return twoDigits(rest);
         }
         if (rest == 0) {
-            return oneDigit(hundredsNum) + " " + "Hundred";
+            return ones(hundredsNum) + " " + "Hundred";
         }
-        return oneDigit(hundredsNum) + " " + "Hundred " + twoDigits(rest);
+        return ones(hundredsNum) + " " + "Hundred " + twoDigits(rest);
 
     }
 
-    private String numberToWords(int num) {
+    private static String numberToWords(int num) {
         if (num == 0) {
             return "Zero";
         }
@@ -185,7 +187,7 @@ public class Solutions {
         int thousand = num / 1000;
         num -= thousand * 1000;
 
-        String ret;
+        String ret = "";
         if (billion > 0) {
             ret += (threeDigits(billion) + " Billion ");
         }
@@ -195,7 +197,7 @@ public class Solutions {
         if (thousand > 0) {
             ret += (threeDigits(thousand) + " Thousand ");
         }
-        if (rest > 0) {
+        if (num > 0) {
             ret += threeDigits(num);
         }
         return ret.strip();
