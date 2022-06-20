@@ -175,7 +175,7 @@ public class Solutions {
 
     }
 
-    private static String numberToWords(int num) {
+    public static String numberToWords(int num) {
         if (num == 0) {
             return "Zero";
         }
