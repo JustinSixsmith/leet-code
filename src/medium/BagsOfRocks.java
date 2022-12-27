@@ -1,7 +1,7 @@
 package medium;
 
 class BagsOfRocks {
-    public int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
+    public static int maximumBags(int[] capacity, int[] rocks, int additionalRocks) {
         int fullBags = 0;
 
         // Fill bags while there are additional rocks leftover
@@ -40,4 +40,12 @@ class BagsOfRocks {
         }
         return fullBags;
     }
+
+    public static void main(String[] args) {
+        int[] capacity = {91, 54, 63, 99, 24, 45, 78};
+        int[] rocks = {35, 32, 45, 98, 6, 1, 25};
+        System.out.println(BagsOfRocks.maximumBags(capacity, rocks, 17));
+    }
 }
+
+
